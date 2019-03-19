@@ -1,0 +1,7 @@
+<h1>Your Chirp Feed</h1>
+
+<% @chirps.each do |chirp| %>
+  <h3><%= chirp.created_at %></h3>
+  <p><%= link_to("#{chirp.content}", "/chirps/#{chirp.id}") %></p>
+<% end %>
+<p>hey <a href="/chirps/new">what</a> is up denny's</p>
