@@ -1,0 +1,10 @@
+<h1>so you goofed something, huh?</h1>
+
+<%= form_tag("/chirps/#{@chirp.id}", method: :put) do %>
+  <%= label_tag(:content, 'we all do it from time to time') %>
+  <br>
+  <%= text_area_tag(:content, "#{@chirp.content}", size: '20x10') %>
+  <br>
+  <%= submit_tag("fix your mistakes, while you can") %>
+
+<% end %>

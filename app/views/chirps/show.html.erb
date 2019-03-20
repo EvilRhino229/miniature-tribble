@@ -1,2 +1,12 @@
 <h3><%= @chirp.created_at %></h3>
-<p><%= @chirp.content %></p>
+<h4><%= @chirp.content %></h4>
+<p><%= @chirp.comments %></p>
+<%= link_to("Un-goof", "/chirps/#{@chirp.id}/edit") %>
+<br>
+<br>
+<br>
+<%= link_to("Back to the comfort zone, buddy.", "/chirps") %>
+<br>
+<br>
+<br>
+<%= link_to("If you ever want to run for president and this is too embarrassing, just click this.", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "you meant to press that, right? click this if you really meant to press that."}) %>

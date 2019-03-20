@@ -16,4 +16,20 @@ class ChirpsController < ApplicationController
     chirp.save
     redirect_to "/chirps"
   end
+
+  def edit
+    @chirp = Chirp.find(params[:id])
+  end
+
+  def update
+    chirp = Chirp.find(params[:id])
+    chirp.update(content: params[:content])
+    redirect_to "/chirps/#{chirp.id}"
+  end
+
+  def destroy
+    chirp = Chirp.find(params[:id])
+    chirp.destroy
+    redirect_to "/chirps"
+  end
 end
