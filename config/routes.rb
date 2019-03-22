@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get '/chirps/:id/edit' => 'chirps#edit'
   put '/chirps/:id' => 'chirps#update'
   delete '/chirps/:id' => 'chirps#destroy'
+
+  post '/chirps/:chirp_id/comments' => 'comments#create'
+  delete '/chirps/:chirp_id/comments/:comment_id' => 'comments#destroy'
+
 end
