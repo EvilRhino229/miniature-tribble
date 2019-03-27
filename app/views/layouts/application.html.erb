@@ -11,23 +11,36 @@
 
   <body>
 
-    <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
-      <a class="navbar-brand" href="#">Legally can't be called Twitter</a>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <!-- <a class="navbar-brand" href="#">Chirp-E</a> -->
+      <%= link_to("Chirp-E", "/", class: "navbar-brand") %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+    <% if user_signed_in? %>
+          <strong style="color: white;">Logged in as <%= current_user.email %></strong>
+          <%= link_to('Change who you are', edit_user_registration_path) %> | 
+          <%= link_to('Be bored again', destroy_user_session_path, method: :delete) %>
+    <% else %>
+          <%= link_to "Create your new identity", new_user_registration_path %> |
+          <%= link_to "Assume your new identity once more", new_user_session_path %>
+    <% end %>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item <%= 'active' if current_page?('/recipes/new')%>">
+      <%= link_to("/chirps", class: "nav-link") do %>
+      <%= link_to("/chirps", class: "navbar-brand") do %>
+        birdfeed <%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/chirps") %>
+      <% end %>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Hyaa!</a>
+          <% end %>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              yikes
+              Dropdown
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">Action</a>
@@ -44,6 +57,7 @@
       </div>
     </nav>
     <div class="container main-content">
+      <%= flash_messages %>
       <%= yield %>
     </div>
   </body>

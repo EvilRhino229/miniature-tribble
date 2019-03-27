@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   get '/' => 'chirps#index'
   get '/chirps' => 'chirps#index'
   get '/chirps/new' => 'chirps#new'

@@ -2,13 +2,13 @@
 <h2><marquee scrollamount="6" direction="right" behavior="alternate"> pls no nudes, we're not that kind of operation</marquee></h2>
 
 <%= form_tag('/chirps', method: :post) do %>
-<!--   <label for="content">Shout your message into the deep and insatiable internet void</label>
+  <div class="form-group">
+  <!--   <label for="content">Shout your message into the deep and insatiable internet void</label>
   <textarea name="content" id="content"></textarea>
   <input type="submit" value="blast it out there, my dude"> -->
   <%= label_tag(:content, 'Shout into the nameless void, and see if it responds:') %>
-  <br>
-  <%= text_area_tag(:content, nil, size: '20x10') %>
-  <br>
-  <%= submit_tag("blast it out there, my dude") %>
+  <%= text_area_tag(:content, nil, class: "form-control") %>
+  <%= submit_tag("blast it out there, my dude", class: "btn btn-success") %>
+</div>
 
 <% end %>
