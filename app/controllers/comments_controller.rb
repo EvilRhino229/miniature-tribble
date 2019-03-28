@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
   def create
     Comment.create(chirp_id: params[:chirp_id],
                    content: params[:content])

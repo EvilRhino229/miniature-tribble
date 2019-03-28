@@ -1,4 +1,5 @@
 class ChirpsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   def index
     @chirps = Chirp.all
   end
@@ -25,7 +26,7 @@ class ChirpsController < ApplicationController
   def update
     chirp = Chirp.find(params[:id])
     chirp.update(content: params[:content])
-    flash[:success] = "You took your words back. Something I can't do."
+    flash[:notice] = "You took your words back. Something I can't do."
     redirect_to "/chirps/#{chirp.id}"
   end
 

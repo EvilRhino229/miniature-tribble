@@ -17,18 +17,14 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-    <% if user_signed_in? %>
-          <strong style="color: white;">Logged in as <%= current_user.email %></strong>
-          <%= link_to('Change who you are', edit_user_registration_path) %> | 
-          <%= link_to('Be bored again', destroy_user_session_path, method: :delete) %>
-    <% else %>
-          <%= link_to "Create your new identity", new_user_registration_path %> |
-          <%= link_to "Assume your new identity once more", new_user_session_path %>
-    <% end %>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item <%= 'active' if current_page?('/recipes/new')%>">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item <%= 'active' if current_page?('/chirps/new')%>">
+            <%= link_to("/chirps/new", class: "nav-link") do %>
+            yeet <%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("chirps/new") %>
+            <% end %>
+          </li>
       <%= link_to("/chirps", class: "nav-link") do %>
       <%= link_to("/chirps", class: "navbar-brand") do %>
         birdfeed <%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/chirps") %>
@@ -38,25 +34,34 @@
             <a class="nav-link" href="#">Hyaa!</a>
           <% end %>
           </li>
+
+        <% if user_signed_in? %> 
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
+          <strong>Logged in as <%= current_user.first_name %></strong>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+            <%= link_to('Change who you are', edit_user_registration_path, class: "dropdown-item") %>
               <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
+            <%= link_to('Go back to boring real life', destroy_user_session_path, method: :delete, class: "dropdown-item") %>
             </div>
           </li>
+        <% else %>
+          <li class="nav-item <%= 'active' if current_page?('/users/sign_in')%>">
+          <%= link_to("/users/sign_in", class: "nav-link") do %>
+        log in <%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users/sign_in") %>
+        <% end %>
+      <% end %>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">snoop around (snoop up, snoop up and get down)</button>
         </form>
       </div>
     </nav>
     <div class="container main-content">
+      <!-- <%= link_to("bye", destroy_user_session_path, method: :delete, class: "dropdown-item") %> -->
       <%= flash_messages %>
       <%= yield %>
     </div>

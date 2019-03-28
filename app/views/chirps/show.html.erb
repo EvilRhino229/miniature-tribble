@@ -123,16 +123,18 @@
 
 
 <%= form_tag("/chirps/#{@chirp.id}/comments", method: :post) do %>
-  <div class="form-group">
-    <%= label_tag(:content, "Comment on some other buffoon's post to tell them how wrong they are")%>
-    <%= text_area_tag(:content, nil, class: "form-control") %>
-  </div>
-<%= hidden_field_tag(:chirp_id, @chirp.id) %>
-<%= submit_tag("Blast that one out here too, why don't ya.", class: "btn btn-warning") %>
-<% end %>
+  <% if user_signed_in? %>
+    <div class="form-group">
+      <%= label_tag(:content, "Comment on some other buffoon's post to tell them how wrong they are")%>
+      <%= text_area_tag(:content, nil, class: "form-control") %>
+    </div>
+    <%= hidden_field_tag(:chirp_id, @chirp.id) %>
+    <%= submit_tag("Blast that one out here too, why don't ya.", class: "btn btn-warning") %>
+    <% end %>
+  <% end %>
 
-<h4>Comments:</h4>
-<% @chirp.comments.each do |comment| %>
-<p><%= comment.content %></p>
-<p><%= link_to("Delete comment, just in case", "/chirps/#{@chirp.id}/comments/#{comment.id}", method: :delete)%></p>
-<% end %>
+  <h4>Comments:</h4>
+  <% @chirp.comments.each do |comment| %>
+  <p><%= comment.content %></p>
+  <p><%= link_to("Delete comment, just in case", "/chirps/#{@chirp.id}/comments/#{comment.id}", method: :delete)%></p>
+  <% end %>
