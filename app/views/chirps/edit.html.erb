@@ -1,9 +1,25 @@
-<h1>so you goofed something, huh?</h1>
+<h1 class="text-center">so you goofed something, huh?</h1>
 
-<%= form_tag("/chirps/#{@chirp.id}", method: :put) do %>
-<div class="form-group">
-  <%= label_tag(:content, 'we all do it from time to time') %>
-  <%= text_area_tag(:content, "#{@chirp.content}", size: '20x10', class: "form-control") %>
+<div class="row justify-content-center">
+  <% if @error_messages && @error_messages.any? %>
+    <div id="error-explanation">
+      <h2><%= pluralize(@error_messages.count, "error") %> you goofed, and here's why:</h2>
+
+      <ul>
+        <% @error_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 </div>
-  <%= submit_tag("fix your mistakes, while you can", class: "btn btn-success") %>
-<% end %>
+
+<div class="row justify-content-center">
+  <%= form_tag("/chirps/#{@chirp.id}", method: :put) do %>
+  <div class="form-group">
+    <%= label_tag(:content, 'we all do it from time to time') %>
+    <%= text_area_tag(:content, "#{@chirp.content}", size: '20x1', class: "form-control") %>
+  </div>
+    <%= submit_tag("fix your mistakes, while you can", class: "btn btn-success") %>
+  <% end %>
+</div>

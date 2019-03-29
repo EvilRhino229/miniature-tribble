@@ -1,22 +1,27 @@
 class ChirpsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: [:show]
   def index
     @chirps = Chirp.all
   end
 
   def show
     @chirp = Chirp.find(params[:id])
+    @comment = Comment.new
   end
 
   def new
-
+    @chirp = Chirp.new
   end
 
   def create
-    chirp = Chirp.new(content: params[:content])
-    chirp.save
-    flash[:success] = "Weird thing successfully shouted! (shouted? shaut?)"
-    redirect_to "/chirps"
+    @chirp = Chirp.new(content: params[:content])
+    if @chirp.save
+      flash[:success] = "Weird thing successfully shouted! (shouted? shaut?)"
+      redirect_to "/chirps"
+    else
+      flash[:error] = "idiot, it's WRONG"
+      render 'new'
+    end
   end
 
   def edit
@@ -24,10 +29,16 @@ class ChirpsController < ApplicationController
   end
 
   def update
-    chirp = Chirp.find(params[:id])
-    chirp.update(content: params[:content])
-    flash[:notice] = "You took your words back. Something I can't do."
-    redirect_to "/chirps/#{chirp.id}"
+    @chirp = Chirp.find(params[:id])
+    if @chirp.update(content: params[:content])
+      flash[:notice] = "You took your words back. Something I can't do."
+      redirect_to "/chirps/#{@chirp.id}"
+    else
+      @error_messages = @chirp.errors.full_messages
+      chirp = Chirp.find(params[:id])
+      flash[:error] = "tried to pull a sneaky on me, huh?"
+      render 'edit'
+    end
   end
 
   def destroy

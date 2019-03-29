@@ -1,14 +1,31 @@
 <h1><marquee scrollamount="5" direction="right" behavior="alternate">What do you wanna blast out on this ol' internet box here?</marquee></h1>
 <h2><marquee scrollamount="6" direction="right" behavior="alternate"> pls no nudes, we're not that kind of operation</marquee></h2>
 
+<div class="row justify-content-center">
+  <% if @chirp && @chirp.errors.any? %>
+    <div id="error-explanation">
+      <h2><%= pluralize(@chirp.errors.count, "error") %> you goofed, and here's why:</h2>
+
+      <ul>
+        <% @chirp.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+
 <%= form_tag('/chirps', method: :post) do %>
   <div class="form-group">
   <!--   <label for="content">Shout your message into the deep and insatiable internet void</label>
   <textarea name="content" id="content"></textarea>
   <input type="submit" value="blast it out there, my dude"> -->
+    <div class="row justify-content-center">
   <%= label_tag(:content, 'Shout into the nameless void, and see if it responds:') %>
-  <%= text_area_tag(:content, nil, class: "form-control") %>
+  <%= text_area_tag(:content, @chirp.content, size: '20x1', class: "form-control") %>
   <%= submit_tag("blast it out there, my dude", class: "btn btn-success") %>
-</div>
+    </div>
+  </div>
 
 <% end %>

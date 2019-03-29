@@ -1,10 +1,23 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+
+  # before_action :authenticate_user!, only: [:create, :destroy]
+  #   def authenticate_admin!
+  #     if current_user.admin? == false
+  #       flash[:error] = "You must be an admin in order to access that!"
+  #       redirect_to “/”
+  #     end
+  #   end
   def create
-    Comment.create(chirp_id: params[:chirp_id],
-                   content: params[:content])
-    flash[:success] = "Successfully just shouted at someone online. Nice."
-    redirect_to "/chirps/#{params[:chirp_id]}"
+    @comment = Comment.new(chirp_id: params[:chirp_id],
+                              content: params[:content])
+
+    if @comment.save
+      flash[:success] = "Successfully just shouted at someone online. Nice."
+      redirect_to "/chirps/#{params[:chirp_id]}"
+    else
+      @chirp = Chirp.find(params[:chirp_id])
+      render "chirps/show"
+    end
   end
 
   def destroy

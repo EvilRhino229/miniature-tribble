@@ -1,5 +1,16 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  devise_scope :user do
+    authenticated :user do
+      root 'chirps#index', as: :authenticated_root
+    end
+
+    unauthenticated do
+      root 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
   get '/' => 'chirps#index'
   get '/chirps' => 'chirps#index'
   get '/chirps/new' => 'chirps#new'
@@ -10,6 +21,7 @@ Rails.application.routes.draw do
   delete '/chirps/:id' => 'chirps#destroy'
 
   post '/chirps/:chirp_id/comments' => 'comments#create'
+  get '/chirps/:id/comments' => 'chirps#show'
   delete '/chirps/:chirp_id/comments/:comment_id' => 'comments#destroy'
 
 end
