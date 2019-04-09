@@ -1,0 +1,22 @@
+<table class="table table-hover">
+  <thead>
+    <tr><th></th>
+      <th>Users</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name %> <%= user.last_name%></td>
+        <td><%= link_to("Glimpse into others' virtual lives", "/users/#{user.id}", class: "btn btn-sm btn-dark") %></td>
+        <% if current_user.id != user.id && !current_user.followees.include?(user)%>
+        <td><%= link_to("Stalk", "/users/#{user.id}/relationships", method: :post, class: "btn btn-danger") %></td>
+        <td>Stalk them</td>
+        <% else %>
+          <td>no deal, bro</td>
+        <% end %>
+      </tr>
+    </tbody>
+  <% end %>
+</table>

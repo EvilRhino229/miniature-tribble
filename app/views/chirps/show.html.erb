@@ -1,11 +1,14 @@
-<h3><%= @chirp.created_at %></h3>
+
 <h4><%= @chirp.content %></h4>
+<h5><%= @chirp.created_at %></h5>
 <!-- <p><% @chirp.comments %></p> -->
-<div class="form-group">
-<%= link_to("Un-goof", "/chirps/#{@chirp.id}/edit", class: "btn btn-warning") %>
-<!-- <%= link_to("Back to the comfort zone, buddy.", "/chirps") %> -->
-<%= link_to("If you ever want to run for president and this is too embarrassing, just click this.", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "you meant to press that, right? click this if you really meant to press that."}, class: "btn btn-danger")%>
-</div>
+
+
+  <div class="form-group">
+  <%= link_to("Un-goof", "/chirps/#{@chirp.id}/edit", class: "btn btn-warning") %>
+  <!-- <%= link_to("Back to the comfort zone, buddy.", "/chirps") %> -->
+  <%= link_to("If you ever want to run for president and this is too embarrassing, just click this.", "/chirps/#{@chirp.id}", method: :delete, data: {confirm: "you meant to press that, right? click this if you really meant to press that."}, class: "btn btn-danger")%>
+  </div>
 
 <% if user_signed_in? %>
   <div class="row justify-content-center">

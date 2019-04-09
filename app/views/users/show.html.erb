@@ -1,0 +1,11 @@
+<h1><marquee scrollamount="200" behavior="slide" direction="left"><%= @user.first_name %> <%= @user.last_name %></marquee></h1>
+<p><%= @user.first_name %> is stalked by <%= @user.followers.count%> follower(s)</p>
+<p><%= @user.first_name %> is stalking <%= @user.followees.count%> people</p>
+
+<% if !current_user.followees.include?(@user) %>
+  <p class="text-muted">You can't follow yourself, idiot</p>
+<% elsif current_user.id == @user.id %>
+  <%= link_to("Stalk", "/users/#{@user.id}/relationships", method: :post, class: "btn btn-danger") %>
+<% else %>
+  <p class="text-muted"> You're stalking <%= @user.first_name %></p>
+<% end %>

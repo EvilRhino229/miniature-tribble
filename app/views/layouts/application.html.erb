@@ -33,6 +33,11 @@
             yeet <%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("chirps/new") %>
             <% end %>
           </li>
+          <li class="nav-item <%= 'active' if current_page?('/users')%>">
+            <%= link_to("/users", class: "nav-link") do %>
+            everyone who uses this dang ol' website <%= (content_tag :span, "(current)", :class => "sr-only") if current_page?("/users") %>
+            <% end %>
+          </li>
         <% end %>
 
         <% if user_signed_in? %> 

@@ -2,6 +2,10 @@
 <h2><marquee scrollamount="6" direction="right" behavior="alternate"> pls no nudes, we're not that kind of operation</marquee></h2>
 
 <div class="row justify-content-center">
+  Current user is <em><%= current_user.first_name %></em>
+</div>
+
+<div class="row justify-content-center">
   <% if @chirp && @chirp.errors.any? %>
     <div id="error-explanation">
       <h2><%= pluralize(@chirp.errors.count, "error") %> you goofed, and here's why:</h2>

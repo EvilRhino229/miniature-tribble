@@ -1,12 +1,12 @@
 <h1 class="text-center">so you goofed something, huh?</h1>
 
 <div class="row justify-content-center">
-  <% if @error_messages && @error_messages.any? %>
+  <% if @chirp.errors.any? %>
     <div id="error-explanation">
-      <h2><%= pluralize(@error_messages.count, "error") %> you goofed, and here's why:</h2>
+      <h2><%= pluralize(@chirp.errors.count, "error") %> prevented this Chirp from being updated:</h2>
 
       <ul>
-        <% @error_messages.each do |message| %>
+        <% @chirp.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>

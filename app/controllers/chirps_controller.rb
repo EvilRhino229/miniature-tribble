@@ -29,14 +29,12 @@ class ChirpsController < ApplicationController
   end
 
   def update
-    @chirp = Chirp.find(params[:id])
+    @chirp = Chirp.find(params[:id]) 
+
     if @chirp.update(content: params[:content])
-      flash[:notice] = "You took your words back. Something I can't do."
+      flash[:success] = "You changed the record of what you've previously said in the past. But I remember. Je me souviens."
       redirect_to "/chirps/#{@chirp.id}"
     else
-      @error_messages = @chirp.errors.full_messages
-      chirp = Chirp.find(params[:id])
-      flash[:error] = "tried to pull a sneaky on me, huh?"
       render 'edit'
     end
   end

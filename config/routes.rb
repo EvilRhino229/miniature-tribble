@@ -10,7 +10,10 @@ Rails.application.routes.draw do
       root 'devise/sessions#new', as: :unauthenticated_root
     end
   end
-
+  # Users
+  get '/users' => 'users#index'
+  get '/users/:id' => 'users#show'
+  # Posts
   get '/' => 'chirps#index'
   get '/chirps' => 'chirps#index'
   get '/chirps/new' => 'chirps#new'
@@ -19,9 +22,12 @@ Rails.application.routes.draw do
   get '/chirps/:id/edit' => 'chirps#edit'
   put '/chirps/:id' => 'chirps#update'
   delete '/chirps/:id' => 'chirps#destroy'
-
+  # Comments
   post '/chirps/:chirp_id/comments' => 'comments#create'
   get '/chirps/:id/comments' => 'chirps#show'
   delete '/chirps/:chirp_id/comments/:comment_id' => 'comments#destroy'
+  # Relationships
+  post '/users/:followee_id/relationships' => 'relationships#create'
+  delete '/relationships' => 'relationships#destroy'
 
 end
