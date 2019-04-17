@@ -9,7 +9,9 @@ class CommentsController < ApplicationController
   #   end
   def create
     @comment = Comment.new(chirp_id: params[:chirp_id],
-                              content: params[:content])
+                              content: params[:content],
+                              user_id: current_user.id
+                              )
 
     if @comment.save
       flash[:success] = "Successfully just shouted at someone online. Nice."

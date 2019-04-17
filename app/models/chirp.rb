@@ -1,5 +1,6 @@
 class Chirp < ApplicationRecord
   has_many :comments
+  belongs_to :user
   validates :content, length: {minimum: 1, maximum: 141}
 
   # def posted_by
