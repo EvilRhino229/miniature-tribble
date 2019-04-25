@@ -9,7 +9,7 @@ $(document).ready(function() {
       <big>Tim Kepple</big>
       <small class="muted">The Time</small>
       <p>New comment.</p>
-    </div>`).hide();
+    </div>`).hide(); 
     console.log("click")
     $commentsDiv.append($newComment.fadeIn());
   });

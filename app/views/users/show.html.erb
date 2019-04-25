@@ -1,4 +1,7 @@
 <h1><marquee scrollamount="200" behavior="slide" direction="left"><%= @user.first_name %> <%= @user.last_name %></marquee></h1>
+<% if @user.profile_image.attached? %>
+  <%= image_tag(@user.profile_image, class: "profile_picture", size: "256x256") %>
+<% end %>
 <p><%= @user.first_name %> is stalked by <%= @user.followers.count%> follower(s)</p>
 <p><%= @user.first_name %> is stalking <%= @user.followees.count%> people</p>
 

@@ -1,7 +1,12 @@
  <h1>Your Chirp Feed</h1>
 
 <% @chirps.each do |chirp| %>
+<div class="chirp media">
+  <%= image_tag(chirp.user.profile_image) %>
+  <div class="media-body">
   <big><%= chirp.user.first_name %> <%= chirp.user.last_name %></big>
   <small class="muted"><%= chirp.formatted_time %></small>
   <p><%= link_to("#{chirp.content}", "/chirps/#{chirp.id}") %></p>
+  </div>
+</div>
 <% end %>
